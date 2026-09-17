@@ -642,12 +642,6 @@ class FamilyPlanService
         $photosCount = $familyPlan->housingInfo()->where('housing_info_type_id', 2)->count();
         $hasMinPhotos = $photosCount === 1;
 
-
-        // Debe al menos existir un grafico (plano) de la vivienda registrado
-        // $housingGraphicsCount = $familyPlan->housingInfo()->count();
-        // $hasMinHousingGraphics = $housingGraphicsCount >= 1;
-
-
         // Verificar si el plan de acción al menos tienes un antes, durante y después registrado
         $actionPlanIds = \App\Models\ActionPlan\ActionPlan::whereHas('riskFactor', function ($q) use ($id) {
         $q->where('family_plan_id', $id); })->pluck('id');
@@ -666,12 +660,12 @@ class FamilyPlanService
 
         // Determinar validez (ambos requisitos deben cumplirse)
         // $isValid = $hasMembers && $hasRiskFactors;
-        $isValid = $hasMinMembers
+        $isValid = 
+            $hasMinMembers
             && $hasMinRiskFactors
             && $hasMinResources
             && $hasMinPhotos
-            && $hasBasicData
-            // && $hasMinHousingGraphics
+            // && $hasBasicData
             && $hasActionPlan;
 
 
@@ -698,25 +692,20 @@ class FamilyPlanService
                 'has_photos'         => $hasMinPhotos,
                 'photos_count'       => $photosCount,
 
-                'has_basic_data' => $hasBasicData,
-                'missing_basic_data' => array_filter([
-                    !$familyPlan->address ? 'address' : null,
-                    !$familyPlan->sector_id ? 'sector_id' : null,
-                    !$familyPlan->sector_name ? 'sector_name' : null,
-                    !$familyPlan->last_names ? 'last_names' : null,
-                    !$familyPlan->city_id ? 'city_id' : null,
-                    !$familyPlan->department_id ? 'department_id' : null,
-                    !$familyPlan->zone_id ? 'zone_id' : null,
-                ]),
+                // 'has_basic_data' => $hasBasicData,
+                // 'missing_basic_data' => array_filter([
+                //     !$familyPlan->address ? 'address' : null,
+                //     !$familyPlan->sector_id ? 'sector_id' : null,
+                //     !$familyPlan->sector_name ? 'sector_name' : null,
+                //     !$familyPlan->last_names ? 'last_names' : null,
+                //     !$familyPlan->city_id ? 'city_id' : null,
+                //     !$familyPlan->department_id ? 'department_id' : null,
+                //     !$familyPlan->zone_id ? 'zone_id' : null,
+                // ]),
 
                 'has_action_before'  => $hasActionBefore,
                 'has_action_during'  => $hasActionDuring,
                 'has_action_after'   => $hasActionAfter,
-
-                // 'has_members'        => $hasMembers,
-                // 'members_count'      => $familyPlan->familyMembers()->count(),
-                // 'has_risk_factors'   => $hasRiskFactors,
-                // 'risk_factors_count' => $familyPlan->riskFactors()->count(),
             ],
         ];
     }
