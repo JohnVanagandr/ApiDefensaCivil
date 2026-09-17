@@ -26,6 +26,8 @@ return [
     '#^http://localhost:[0-9]+$#',
     '#^http://192\.168\.[0-9]+\.[0-9]+:[0-9]+$#', // Permite cualquier IP local en la red 192.168.x.x con cualquier puerto
     '#^http://10\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+$#', // Permite cualquier IP local en la red 10.x.x.x con cualquier puerto
+    '#^http://172\.(1[6-9]|2[0-9]|3[0-1])\.[0-9]+\.[0-9]+:[0-9]+$#', // Permite IPs de hotspot/red privada 172.16.x.x - 172.31.x.x
+
   ],
 
   'allowed_headers' => ['*'],

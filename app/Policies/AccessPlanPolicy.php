@@ -39,8 +39,8 @@ class AccessPlanPolicy
         // 🟢 Rol 3 → Voluntario
         if ($roleId == 3) {
 
-            // Solo si el estado NO está en [1,2,4,6,7]
-            if (!in_array($plan->status_plan_id, [1,2,4,6,7])) {
+            // Solo si el estado NO está en [2,4,6,7]
+            if (!in_array($plan->status_plan_id, [2, 4, 6, 7])) {
                 $access = $plan->user_id == $user->id;
             }
         }

@@ -232,6 +232,14 @@ class PermissionSeeder extends Seeder
             ['housing-graphics.update-description', 'Actualizar descripción del gráfico'],
             ['housing-graphics.destroy', 'Eliminar gráfico de vivienda'],
 
+            // Coordenadas
+            ['coordinates.index', 'Listar coordenadas'],
+            ['coordinates.show', 'Ver coordenada'],
+            ['coordinates.by-family-plan', 'Ver coordenadas por plan familiar'],
+            ['coordinates.store', 'Crear coordenada'],
+            ['coordinates.update', 'Actualizar coordenada'],
+            ['coordinates.destroy', 'Eliminar coordenada'],
+
             // ================================================================
             // MIEMBROS Y RELACIONES
             // ================================================================

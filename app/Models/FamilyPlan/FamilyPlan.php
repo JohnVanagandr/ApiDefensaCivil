@@ -2,6 +2,7 @@
 
 namespace App\Models\FamilyPlan;
 
+use App\Models\Coordinates;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Audit\Audit; // 🔹 Importar Audit para la relación
@@ -169,6 +170,12 @@ class FamilyPlan extends Model
     {
         return $this->belongsTo(familyType::class, 'family_type_id');
     }
+
+    public function coordinates()
+    {
+        return $this->hasOne(Coordinates::class, 'family_plan_id');
+    }
+
     /**
      * --- RELACIONES HAS MANY (Uno a Muchos) ---
      * Un Plan Familiar puede tener múltiples registros asociados en las siguientes tablas:
